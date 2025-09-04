@@ -1,0 +1,345 @@
+/* Container for the form */
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px 35px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Form title */
+.container h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* Document sections */
+.document-section {
+  border: 1px solid #e1e5e9;
+  padding: 20px;
+  margin-bottom: 25px;
+  border-radius: 10px;
+  background: #fafbfc;
+  transition: all 0.3s ease;
+}
+
+.document-section:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.document-section h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #eaeff2;
+}
+
+/* Input group */
+.input-group {
+  margin-bottom: 18px;
+}
+
+.input-group label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #34495e;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.input-group input[type="text"],
+.input-group input[type="file"] {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #dce1e6;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #2c3e50;
+  background: #fff;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+}
+
+.input-group input[type="text"]:focus,
+.input-group input[type="file"]:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+}
+
+.input-group input[type="text"]:disabled {
+  background-color: #f8f9fa;
+  color: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Buttons */
+.input-group button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+/* Send OTP button */
+.input-group button:first-of-type {
+  background: #3498db;
+  color: #fff;
+}
+
+.input-group button:first-of-type:hover {
+  background: #2980b9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(41, 128, 185, 0.2);
+}
+
+.input-group button:first-of-type:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* OTP group */
+.otp-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.otp-group input {
+  flex: 1;
+  min-width: 120px;
+  max-width: 200px;
+}
+
+.otp-group button {
+  background: #27ae60;
+  color: #fff;
+}
+
+.otp-group button:hover {
+  background: #219653;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(39, 174, 96, 0.2);
+}
+
+.otp-timer {
+  font-size: 0.85rem;
+  color: #e74c3c;
+  font-weight: 500;
+  margin-left: 5px;
+}
+
+/* Verified badge */
+.verified-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  background: #e8f6ef;
+  color: #27ae60;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 10px;
+  border: 1px solid #a3e4bf;
+}
+
+/* File upload group */
+.file-upload-group {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px dashed #dce1e6;
+}
+
+.file-upload-group label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #34495e;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.file-upload-group input[type="file"] {
+  margin-bottom: 15px;
+  padding: 10px;
+  background: #fff;
+  border: 1px dashed #bdc3c7;
+}
+
+.file-upload-group input[type="file"]:hover {
+  border-color: #3498db;
+  background: #f4f9ff;
+}
+
+.file-upload-group p {
+  margin: 8px 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.file-upload-group button {
+  background: #f39c12;
+  color: #fff;
+}
+
+.file-upload-group button:hover {
+  background: #e67e22;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(243, 156, 18, 0.2);
+}
+
+/* Verification result */
+.verification-result {
+  margin-top: 20px;
+  padding: 18px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #bdc3c7;
+}
+
+.verification-result p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+  color: #2c3e50;
+}
+
+.status {
+  font-weight: 700;
+  font-size: 1rem !important;
+}
+
+.status.verified {
+  color: #27ae60;
+}
+
+.status.rejected {
+  color: #e74c3c;
+}
+
+.status.pending {
+  color: #f39c12;
+}
+
+/* Extracted details */
+.extracted-details {
+  margin-top: 15px;
+  padding: 15px;
+  background: #e8f4fc;
+  border-radius: 6px;
+  border-left: 4px solid #3498db;
+}
+
+.extracted-details h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #c5e3fc;
+}
+
+.extracted-details p {
+  margin: 5px 0;
+  color: #34495e;
+}
+
+.extracted-details strong {
+  color: #2c3e50;
+}
+
+/* Submit button */
+.submit-button {
+  width: 100%;
+  padding: 14px 20px;
+  background: #27ae60;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 30px;
+  transition: all 0.3s ease;
+}
+
+.submit-button:hover {
+  background: #219653;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(39, 174, 96, 0.25);
+}
+
+.submit-button:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Expired OTP field */
+.input-field.expired {
+  border: 2px solid #e74c3c !important;
+  background: #ffe6e6 !important;
+  color: #a00 !important;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 20px;
+    margin: 20px;
+  }
+  
+  .document-section {
+    padding: 15px;
+  }
+  
+  .otp-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  
+  .otp-group input {
+    max-width: 100%;
+  }
+  
+  .input-group button {
+    width: 100%;
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container h2 {
+    font-size: 1.5rem;
+  }
+  
+  .document-section h3 {
+    font-size: 1.1rem;
+  }
+  
+  .input-group input[type="text"],
+  .input-group input[type="file"] {
+    padding: 10px 14px;
+    font-size: 0.95rem;
+  }
+  
+  .submit-button {
+    padding: 12px 16px;
+    font-size: 1rem;
+  }
+}

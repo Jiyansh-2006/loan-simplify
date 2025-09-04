@@ -1,0 +1,122 @@
+/* Sidebar Container */
+.sidebar {
+  width: 320px;
+  height: 100vh;
+  background-color: #1e293b; /* slate-800 */
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Logo */
+.sidebar-logo {
+  padding: 1.5rem;
+  border-bottom: 1px solid #334155; /* slate-700 */
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  background-color: #3b82f6; /* blue-500 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+}
+
+.logo-text {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+/* Navigation */
+.sidebar-nav {
+  flex: 1;
+  padding: 1.5rem 1rem;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.nav-button {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: none;
+  border: none;
+  color: #cbd5e1; /* slate-300 */
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.nav-button .icon {
+  width: 20px;
+  height: 20px;
+}
+
+.nav-button:hover {
+  background-color: #334155; /* slate-700 */
+  color: white;
+}
+
+.nav-button.active {
+  background-color: #2563eb; /* blue-600 */
+  color: white;
+}
+
+/* Settings */
+.sidebar-settings {
+  padding: 1rem;
+  border-top: 1px solid #334155;
+}
+
+/* User Profile */
+.sidebar-user {
+  padding: 1rem;
+  border-top: 1px solid #334155;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  background-color: #475569; /* slate-600 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 9999px;
+}
+
+.user-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.logout-button {
+  padding: 0.5rem 1rem;
+  color: #cbd5e1;
+}
+
+.logout-button:hover {
+  background-color: #334155;
+  color: white;
+}

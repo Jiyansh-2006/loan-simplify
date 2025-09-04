@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+python-multipart
+pytesseract
+opencv-python-headless
+Pillow
+python-dotenv
+httpx
+cryptography

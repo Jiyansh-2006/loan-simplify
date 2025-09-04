@@ -1,0 +1,49 @@
+.loan-type-card {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 2px solid #e2e8f0; /* slate-200 */
+  background-color: #ffffff;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.loan-type-card:hover {
+  transform: scale(1.05);
+  border-color: #93c5fd; /* blue-300 */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.loan-type-card.selected {
+  border-color: #3b82f6; /* blue-500 */
+  background-color: #eff6ff; /* blue-50 */
+  box-shadow: 0 4px 12px rgba(59,130,246,0.2);
+}
+
+.loan-type-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.loan-type-icon {
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  background-color: #f1f5f9; /* slate-100 */
+  color: #475569; /* slate-600 */
+}
+
+.loan-type-icon.selected-icon {
+  background-color: #3b82f6; /* blue-500 */
+  color: #ffffff;
+}
+
+.loan-type-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #475569; /* slate-700 */
+}
+
+.loan-type-label.selected-label {
+  color: #1e40af; /* blue-700 */
+}

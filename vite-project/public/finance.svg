@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <circle cx="100" cy="100" r="96" stroke="#757575" stroke-width="3" fill="#fff"/>
+  <text x="100" y="40" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-size="18" font-weight="bold" fill="#757575" letter-spacing="2" transform="rotate(-10 100,40)">LOANSIMPLIFY</text>
+  <g>
+    <!-- Main bird body -->
+    <path d="M100,70 C104,80 109,110 100,140 C91,110 96,80 100,70 Z" fill="url(#birdGradient)" />
+    <!-- Left wing -->
+    <path d="M100,70 C90,80 70,110 60,120 C80,115 85,105 100,90 Z" fill="url(#wingGradient)" />
+    <!-- Right wing -->
+    <path d="M100,70 C110,80 130,110 140,120 C120,115 115,105 100,90 Z" fill="url(#wingGradient)" />
+    <!-- Left tail -->
+    <polygon points="92,140 89,155 95,150" fill="#1976d2"/>
+    <!-- Middle tail -->
+    <polygon points="100,140 99,158 103,158" fill="#64b5f6"/>
+    <!-- Right tail -->
+    <polygon points="108,140 111,155 105,150" fill="#1976d2"/>
+    <!-- Left wing feather -->
+    <path d="M87,100 Q75,110 70,120 Q82,110 100,90" fill="#64b5f6"/>
+    <!-- Right wing feather -->
+    <path d="M113,100 Q125,110 130,120 Q118,110 100,90" fill="#64b5f6"/>
+  </g>
+  <defs>
+    <linearGradient id="birdGradient" x1="100" y1="70" x2="100" y2="140" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#64b5f6"/>
+      <stop offset="1" stop-color="#1976d2"/>
+    </linearGradient>
+    <linearGradient id="wingGradient" x1="60" y1="120" x2="100" y2="90" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#64b5f6"/>
+      <stop offset="1" stop-color="#1976d2"/>
+    </linearGradient>
+  </defs>
+</svg>

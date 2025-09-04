@@ -1,0 +1,31 @@
+.progress-container {
+  margin-bottom: 2rem; /* mb-8 */
+}
+
+.progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem; /* mb-2 */
+}
+
+.progress-title {
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: bold;
+  color: #1e293b; /* slate-800 */
+}
+
+.progress-bar {
+  width: 100%;
+  background-color: #e2e8f0; /* slate-200 */
+  border-radius: 9999px; /* full */
+  height: 0.5rem; /* h-2 */
+  overflow: hidden;
+}
+
+.progress-fill {
+  background-color: #3b82f6; /* blue-500 */
+  height: 0.5rem;
+  border-radius: 9999px;
+  transition: all 0.3s ease-in-out;
+}

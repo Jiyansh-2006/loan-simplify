@@ -1,0 +1,23 @@
+{
+  "name": "loansimplify",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Krishanu2006/LoanSimplify.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Krishanu2006/LoanSimplify/issues"
+  },
+  "homepage": "https://github.com/Krishanu2006/LoanSimplify#readme",
+  "description": "",
+  "dependencies": {
+    "multer": "^2.0.2"
+  }
+}

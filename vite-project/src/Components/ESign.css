@@ -1,0 +1,156 @@
+/* Make page layout full height */
+body, html, #root {
+  height: 100%;
+  margin: 0;
+}
+
+/* Page wrapper to push footer down */
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Main content should expand */
+.container {
+  flex: 1;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer stays at bottom */
+footer {
+  margin-top: auto;
+}
+
+/* Applicant Details Card */
+.kyc-details {
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  background: #fafafa;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.kyc-details p {
+  margin: 0.6rem 0;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: #333;
+}
+
+.kyc-details strong {
+  display: inline-block;
+  width: 100px;   /* Align labels neatly */
+  color: #555;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Button variants */
+.btn.primary {
+  background-color: #0c4da2;
+  color: #fff;
+  border: none;
+}
+
+.btn.primary:hover {
+  background-color: #093a7a;
+}
+
+.btn.secondary {
+  background-color: #e5e7eb;
+  color: #111;
+  border: none;
+}
+
+.btn.secondary:hover {
+  background-color: #d1d5db;
+}
+
+/* Success Message */
+.success {
+  margin: 1.5rem 0;
+  padding: 1rem 1.5rem;
+  background: #e6ffed;
+  border: 1px solid #a6f4c5;
+  border-left: 6px solid #28a745;
+  border-radius: 8px;
+  color: #155724;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Error Message */
+.error {
+  margin: 1.5rem 0;
+  padding: 1rem 1.5rem;
+  background: #ffeaea;
+  border: 1px solid #f5a6a6;
+  border-left: 6px solid #dc3545;
+  border-radius: 8px;
+  color: #721c24;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* OTP section container */
+.otp-section {
+  display: flex;
+  gap: 10px;       /* space between input and button */
+  max-width: 300px; /* optional */
+  margin-top: 20px;
+}
+
+/* OTP input field */
+.otp-input {
+  flex: 1;             /* equal width with button */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: #000;         /* text color should be visible */
+  background-color: #fff;
+  outline: none;
+}
+
+/* Verify OTP button */
+.otp-section .btn.primary {
+  flex: 1;             /* equal width with input */
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.otp-section .btn.primary:hover {
+  background-color: #45a049;
+}

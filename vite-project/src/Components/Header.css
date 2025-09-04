@@ -1,0 +1,43 @@
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0f172a; /* dark navy */
+  padding: 1rem 2rem;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.logo-container{
+    display: flex;
+    gap: 12px;
+}
+.Logo{
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+}
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #38bdf8; /* light blue */
+  letter-spacing: 1px;
+}
+
+.navigation {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #38bdf8;
+}

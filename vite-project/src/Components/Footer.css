@@ -1,0 +1,26 @@
+.site-footer {
+  background: #0f172a;
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.footer-content p {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+}
+
+.footer-content a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+.footer-content a:hover {
+  text-decoration: underline;
+}
+
+copyright {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
