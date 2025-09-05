@@ -7,38 +7,28 @@ from fastapi import FastAPI, UploadFile, File, Form, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from datetime import datetime
-import logging
 import os
-import httpx
 import random
+import httpx
 from fastapi.responses import JSONResponse
 
-# No need for dotenv on Render — use Render's env vars instead
-# load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "../vite-project/.env"))
-
-# On Render (Linux), Tesseract is installed system-wide
-# pytesseract will automatically find it, so remove Windows path setting
-# pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
-
+# ================= FastAPI app =================
 app = FastAPI()
 
-# Allow frontend requests
-# Allow frontend requests with proper preflight handling
+# ======= CORS Middleware =======
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://loansimp-lif-y.onrender.com"],  # frontend URL
+    allow_origins=["https://loansimp-lif-y.onrender.com"],  # Your frontend
     allow_credentials=True,
-    allow_methods=["*"],   # allow all HTTP methods including OPTIONS
-    allow_headers=["*"],   # allow all headers including Content-Type, Authorization
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-
-# ========== OCR Regex Patterns ==========
+# ================= Regex Patterns =================
 aadhaar_pattern = re.compile(r"^\d{4}\s\d{4}\s\d{4}$")
 pan_pattern = re.compile(r"^[A-Z]{5}[0-9]{4}[A-Z]$")
 apaar_pattern = re.compile(r"^\d{12}$")
 
-# Cleaner name extraction
 name_patterns = [
     re.compile(r"(?:name|full name|नाम|फुल नेम)[:;\s]*([A-Za-z\s]+)", re.IGNORECASE),
     re.compile(r"^([A-Z][a-z]+(?:\s[A-Z][a-z]+){1,2})$"),
@@ -54,7 +44,7 @@ gender_patterns = [
     re.compile(r"\b(male|female|transgender|m|f|t)\b", re.IGNORECASE),
 ]
 
-# ========== Helpers ==========
+# ================= Helpers =================
 def format_date_to_dd_mm_yyyy(date_str):
     formats = [
         '%d/%m/%Y', '%d-%m-%Y', '%d.%m.%Y',
@@ -111,11 +101,7 @@ def extract_fields(lines):
             break
     return details
 
-def extract_details(text, doc_type):
-    lines = clean_text_lines(text)
-    return extract_fields(lines)
-
-# ========== OCR Verification Endpoint ==========
+# ================= OCR Verification =================
 @app.post("/verify")
 async def verify_document(file: UploadFile = File(...), doc_type: str = Form(...), user_input: str = Form(...)):
     try:
@@ -156,7 +142,7 @@ async def verify_document(file: UploadFile = File(...), doc_type: str = Form(...
     except Exception as e:
         return {"status": "Rejected", "feedback": f"Server error: {str(e)}"}
 
-# ========== Chatbot Route ==========
+# ================= Chatbot =================
 class ChatRequest(BaseModel):
     messages: list
 
@@ -168,12 +154,13 @@ async def chatbot(req: ChatRequest):
                 "https://api.groq.com/openai/v1/chat/completions",
                 headers={"Authorization": f"Bearer {os.getenv('GROQ_API_KEY')}", "Content-Type": "application/json"},
                 json={"model": "llama-3.1-8b-instant", "messages": req.messages},
+                timeout=30
             )
         return resp.json()
     except Exception as e:
         return {"error": f"Chatbot error: {str(e)}"}
 
-# ========== OTP Verification ==========
+# ================= OTP Verification =================
 active_user = None
 otp_store = {}
 
@@ -190,6 +177,7 @@ async def one_user_lock(request: Request, call_next):
         return JSONResponse(status_code=403, content={"error": "Verification locked. Only one person allowed."})
     return await call_next(request)
 
+# ===== OTP routes =====
 @app.post("/api/verify/aadhar")
 async def verify_aadhar(req: dict):
     aadhar = req.get("aadharNumber")
@@ -250,9 +238,3 @@ async def reset_verification():
     active_user = None
     otp_store = {}
     return {"message":"Verification system reset. Next person can verify now."}
-
-
-
-
-
-
