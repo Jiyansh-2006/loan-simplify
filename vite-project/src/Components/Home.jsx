@@ -51,7 +51,7 @@ const Home = () => {
           <div className="hero-grid">
             
             {/* Left Text */}
-            <div className={hero-text ${isVisible ? 'animate-in' : ''}}>
+              <div className={`hero-text ${isVisible ? 'animate-in' : ''}`}>
               <div className="trust-badge">
                 <Shield size={16} />
                 <span>Trusted by 500+ Organizations</span>
