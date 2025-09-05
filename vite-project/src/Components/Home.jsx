@@ -51,7 +51,7 @@ const Home = () => {
           <div className="hero-grid">
             
             {/* Left Text */}
-              <div className={`hero-text ${isVisible ? 'animate-in' : ''}`}>
+            <div className={`hero-text ${isVisible ? 'animate-in' : ''}`}>
               <div className="trust-badge">
                 <Shield size={16} />
                 <span>Trusted by 500+ Organizations</span>
@@ -108,7 +108,7 @@ const Home = () => {
             </div>
 
             {/* Right Hero Image */}
-            <div className={hero-image ${isVisible ? 'animate-in-delay' : ''}}>
+            <div className={`hero-image ${isVisible ? 'animate-in-delay' : ''}`}>
               <div className="image-container">
                 <img
                   src="https://images.pexels.com/photos/5668772/pexels-photo-5668772.jpeg?auto=compress&cs=tinysrgb&w=800"
@@ -228,4 +228,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Home;
