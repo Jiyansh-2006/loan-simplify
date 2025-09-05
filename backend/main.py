@@ -25,8 +25,7 @@ app = FastAPI()
 # Allow frontend requests
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://loansimp-lify.onrender.com",
-        "https://loan-simp-lify.onrender.com"],  # you can restrict to your frontend URL later
+    allow_origins=["https://loansimp-lify.onrender.com"],  # you can restrict to your frontend URL later
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -249,5 +248,6 @@ async def reset_verification():
     active_user = None
     otp_store = {}
     return {"message":"Verification system reset. Next person can verify now."}
+
 
 
