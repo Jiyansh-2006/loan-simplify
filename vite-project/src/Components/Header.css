@@ -16,13 +16,13 @@
 
 /* When scrolled */
 .header.scrolled {
-  height: 50px;
   background-color: #ffffff !important; /* still white */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 
 .header-container {
+  height: 46px;
   display: flex;
   align-items: center;
   justify-content: space-between;
