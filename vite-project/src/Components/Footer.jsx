@@ -1,7 +1,7 @@
 import React from 'react';
 import { Shield, Mail, Phone, MapPin, Twitter, Linkedin, Github } from 'lucide-react';
 import './Footer.css';
-import logoImg from "../assets/Logo.png"
+import logoImg from "../assets/Logo.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -42,18 +42,21 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-container">
+        
         {/* Main Footer Content */}
         <div className="footer-content">
+          
           {/* Company Info */}
           <div className="footer-brand">
             <div className="footer-logo">
-              <img src={logoImg} alt="Logo Image" className='logo-icon'/>
+              <img src={logoImg} alt="LoanSimplify Logo" className="logo-icon" />
               <span className="logo-text">LoanSimplify</span>
             </div>
             <p className="footer-description">
               Secure, compliant, and lightning-fast Aadhaar-based document verification 
               platform designed for India's digital future.
             </p>
+
             <div className="contact-info">
               <div className="contact-item">
                 <Mail size={16} />
@@ -68,9 +71,15 @@ const Footer = () => {
                 <span>Mumbai, Maharashtra, India</span>
               </div>
             </div>
+
             <div className="social-links">
               {socialLinks.map((social, index) => (
-                <a key={index} href={social.href} className="social-link" aria-label={social.label}>
+                <a 
+                  key={index} 
+                  href={social.href} 
+                  className="social-link" 
+                  aria-label={social.label}
+                >
                   <social.icon size={20} />
                 </a>
               ))}
@@ -79,49 +88,20 @@ const Footer = () => {
 
           {/* Footer Links */}
           <div className="footer-links">
-            <div className="footer-column">
-              <h3 className="footer-heading">Product</h3>
-              <ul className="footer-list">
-                {footerLinks.product.map((link, index) => (
-                  <li key={index}>
-                    <a href={link.href} className="footer-link">{link.label}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="footer-column">
-              <h3 className="footer-heading">Company</h3>
-              <ul className="footer-list">
-                {footerLinks.company.map((link, index) => (
-                  <li key={index}>
-                    <a href={link.href} className="footer-link">{link.label}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="footer-column">
-              <h3 className="footer-heading">Support</h3>
-              <ul className="footer-list">
-                {footerLinks.support.map((link, index) => (
-                  <li key={index}>
-                    <a href={link.href} className="footer-link">{link.label}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="footer-column">
-              <h3 className="footer-heading">Legal</h3>
-              <ul className="footer-list">
-                {footerLinks.legal.map((link, index) => (
-                  <li key={index}>
-                    <a href={link.href} className="footer-link">{link.label}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {Object.entries(footerLinks).map(([section, links], idx) => (
+              <div className="footer-column" key={idx}>
+                <h3 className="footer-heading">
+                  {section.charAt(0).toUpperCase() + section.slice(1)}
+                </h3>
+                <ul className="footer-list">
+                  {links.map((link, i) => (
+                    <li key={i}>
+                      <a href={link.href} className="footer-link">{link.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -143,6 +123,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
+
       </div>
     </footer>
   );
