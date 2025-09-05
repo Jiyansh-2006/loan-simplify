@@ -59,7 +59,7 @@ const Header = () => {
   ];
 
   return (
-    <header className={header ${isScrolled ? 'scrolled' : ''}}>
+    <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="header-container">
         {/* Left: Logo */}
         <div className="header-left">
@@ -113,8 +113,6 @@ const Header = () => {
               </>
             )}
           </div>
-
-
         </div>
 
         {/* Mobile Menu Button */}
@@ -197,4 +195,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Header;
