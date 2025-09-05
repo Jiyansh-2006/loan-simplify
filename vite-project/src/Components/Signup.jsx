@@ -4,18 +4,12 @@ import Header from "./Header";
 import Footer from "./Footer";
 import "./Signup.css";
 
-import { auth, db, provider } from "../lib/firebase";
-import {
-  createUserWithEmailAndPassword,
-  updateProfile,
-  signInWithPopup,
-} from "firebase/auth";
+import { auth, provider, db } from "../lib/firebase";
+import { createUserWithEmailAndPassword, updateProfile, signInWithPopup } from "firebase/auth";
 import { doc, setDoc, getDoc, serverTimestamp } from "firebase/firestore";
 
 const Signup = () => {
   const navigate = useNavigate();
-
-  // form states
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,14 +17,14 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
 
-  // ✅ Save or create Firestore user profile
-  const saveUserDoc = async (user, customName = "") => {
+  // Ensure Firestore user doc exists
+  const ensureUserDoc = async (user, displayName = "") => {
     const ref = doc(db, "users", user.uid);
     const snap = await getDoc(ref);
     if (!snap.exists()) {
       await setDoc(ref, {
         uid: user.uid,
-        name: user.displayName || customName || "",
+        name: user.displayName || displayName || "",
         email: user.email,
         role: "user",
         createdAt: serverTimestamp(),
@@ -38,19 +32,15 @@ const Signup = () => {
     }
   };
 
-  // ✅ Signup with email/password
+  // Signup with email/password
   const handleSignup = async (e) => {
     e.preventDefault();
     setErr("");
 
-    const trimmedName = name.trim();
-    const trimmedEmail = email.trim();
-
-    if (!trimmedName) {
+    if (!name.trim()) {
       setErr("Please enter your full name.");
       return;
     }
-
     if (password !== confirm) {
       setErr("Passwords do not match.");
       return;
@@ -58,17 +48,16 @@ const Signup = () => {
 
     setLoading(true);
     try {
-      const cred = await createUserWithEmailAndPassword(
-        auth,
-        trimmedEmail,
-        password
-      );
+      const cred = await createUserWithEmailAndPassword(auth, email.trim(), password);
+      await updateProfile(cred.user, { displayName: name.trim() });
+      await ensureUserDoc(cred.user, name.trim());
 
-      // update Firebase Auth profile
-      await updateProfile(cred.user, { displayName: trimmedName });
-
-      // create Firestore document
-      await saveUserDoc(cred.user, trimmedName);
+      // ✅ Save user in localStorage so Header updates
+      localStorage.setItem("user", JSON.stringify({
+        uid: cred.user.uid,
+        email: cred.user.email,
+        name: cred.user.displayName || name.trim(),
+      }));
 
       navigate("/dashboard", { replace: true });
     } catch (error) {
@@ -78,13 +67,21 @@ const Signup = () => {
     }
   };
 
-  // ✅ Signup with Google
+  // Signup with Google
   const handleGoogleSignup = async () => {
     setErr("");
     setLoading(true);
     try {
       const cred = await signInWithPopup(auth, provider);
-      await saveUserDoc(cred.user);
+      await ensureUserDoc(cred.user);
+
+      // ✅ Save user in localStorage
+      localStorage.setItem("user", JSON.stringify({
+        uid: cred.user.uid,
+        email: cred.user.email,
+        name: cred.user.displayName || "",
+      }));
+
       navigate("/dashboard", { replace: true });
     } catch (error) {
       setErr(readableError(error));
@@ -155,8 +152,8 @@ const Signup = () => {
 
           <button
             type="button"
-            onClick={handleGoogleSignup}
             className="signup-button google"
+            onClick={handleGoogleSignup}
             disabled={loading}
           >
             {loading ? "Please wait..." : "Continue with Google"}
@@ -169,7 +166,6 @@ const Signup = () => {
           </p>
         </form>
       </div>
-
       <Footer />
     </div>
   );
@@ -177,16 +173,12 @@ const Signup = () => {
 
 export default Signup;
 
-// ✅ Firebase error mapper
 function readableError(err) {
   const code = err?.code || "";
-  if (code.includes("auth/email-already-in-use"))
-    return "This email is already registered.";
+  if (code.includes("auth/email-already-in-use")) return "This email is already registered.";
   if (code.includes("auth/invalid-email")) return "Invalid email format.";
-  if (code.includes("auth/weak-password"))
-    return "Password should be at least 6 characters.";
-  if (code.includes("auth/network-request-failed"))
-    return "Network error. Please check your internet connection.";
+  if (code.includes("auth/weak-password")) return "Password should be at least 6 characters.";
+  if (code.includes("auth/network-request-failed")) return "Network error. Please check your internet connection.";
   if (code.includes("popup-closed-by-user")) return "Google signup cancelled.";
   return err?.message || "Something went wrong. Please try again.";
 }
