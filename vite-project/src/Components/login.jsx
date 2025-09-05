@@ -42,6 +42,14 @@ const Login = () => {
     try {
       const cred = await signInWithEmailAndPassword(auth, email.trim(), password);
       await ensureUserDoc(cred.user);
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          uid: cred.user.uid,
+          email: cred.user.email,
+          name: cred.user.displayName || "",
+        })
+      );
       navigate("/dashboard"); // ✅ redirect after login
     } catch (error) {
       setErr(readableError(error));
@@ -58,6 +66,14 @@ const Login = () => {
     try {
       const cred = await signInWithPopup(auth, provider);
       await ensureUserDoc(cred.user);
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          uid: cred.user.uid,
+          email: cred.user.email,
+          name: cred.user.displayName || "",
+        })
+      );
       navigate("/dashboard"); // ✅ redirect after login
     } catch (error) {
       setErr(readableError(error));
@@ -84,7 +100,9 @@ const Login = () => {
           {loading ? "Please wait..." : "Google"}
         </button>
 
-        <p className="separator"><span>or</span></p>
+        <p className="separator">
+          <span>or</span>
+        </p>
 
         {/* 🔹 Email/Password Login */}
         <form className="login-form" onSubmit={handleEmailLogin}>
@@ -116,11 +134,7 @@ const Login = () => {
             Forgot Password?
           </Link>
 
-          <button
-            type="submit"
-            className="login-button"
-            disabled={loading}
-          >
+          <button type="submit" className="login-button" disabled={loading}>
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>
