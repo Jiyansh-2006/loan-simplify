@@ -8,23 +8,22 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from datetime import datetime
 import os
-import random
 import httpx
+import random
 from fastapi.responses import JSONResponse
 
-# ================= FastAPI app =================
 app = FastAPI()
 
-# ======= CORS Middleware =======
+# ========== CORS ==========
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://loansimp-lif-y.onrender.com"],  # Your frontend
+    allow_origins=["https://loansimp-lif-y.onrender.com"],  # your frontend URL
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# ================= Regex Patterns =================
+# ========== OCR Regex Patterns ==========
 aadhaar_pattern = re.compile(r"^\d{4}\s\d{4}\s\d{4}$")
 pan_pattern = re.compile(r"^[A-Z]{5}[0-9]{4}[A-Z]$")
 apaar_pattern = re.compile(r"^\d{12}$")
@@ -44,7 +43,7 @@ gender_patterns = [
     re.compile(r"\b(male|female|transgender|m|f|t)\b", re.IGNORECASE),
 ]
 
-# ================= Helpers =================
+# ========== Helpers ==========
 def format_date_to_dd_mm_yyyy(date_str):
     formats = [
         '%d/%m/%Y', '%d-%m-%Y', '%d.%m.%Y',
@@ -72,6 +71,7 @@ def clean_text_lines(text):
 
 def extract_fields(lines):
     details = {}
+    # Name
     for l in lines:
         if any(x in l.lower() for x in ["dob", "date", "birth", "gender"]):
             continue
@@ -82,6 +82,7 @@ def extract_fields(lines):
                 break
         if "name" in details:
             break
+    # DOB
     for l in lines:
         for pattern in dob_patterns:
             m = pattern.search(l)
@@ -90,6 +91,7 @@ def extract_fields(lines):
                 break
         if "dob" in details:
             break
+    # Gender
     for l in lines:
         for pattern in gender_patterns:
             m = pattern.search(l)
@@ -101,7 +103,7 @@ def extract_fields(lines):
             break
     return details
 
-# ================= OCR Verification =================
+# ========== OCR Verification ==========
 @app.post("/verify")
 async def verify_document(file: UploadFile = File(...), doc_type: str = Form(...), user_input: str = Form(...)):
     try:
@@ -142,42 +144,41 @@ async def verify_document(file: UploadFile = File(...), doc_type: str = Form(...
     except Exception as e:
         return {"status": "Rejected", "feedback": f"Server error: {str(e)}"}
 
-# ================= Chatbot =================
+# ========== Chatbot ==========
 class ChatRequest(BaseModel):
     messages: list
 
 @app.post("/api/chat")
 async def chatbot(req: ChatRequest):
     try:
+        api_key = os.getenv("GROQ_API_KEY")
+        if not api_key:
+            return {"error": "API key missing on server"}
+
         async with httpx.AsyncClient() as client:
             resp = await client.post(
                 "https://api.groq.com/openai/v1/chat/completions",
-                headers={"Authorization": f"Bearer {os.getenv('GROQ_API_KEY')}", "Content-Type": "application/json"},
-                json={"model": "llama-3.1-8b-instant", "messages": req.messages},
+                headers={
+                    "Authorization": f"Bearer {api_key}",
+                    "Content-Type": "application/json",
+                },
+                json={
+                    "model": "llama-3.1-8b-instant",
+                    "messages": req.messages
+                },
                 timeout=30
             )
         return resp.json()
     except Exception as e:
+        print("Chatbot error:", e)
         return {"error": f"Chatbot error: {str(e)}"}
 
-# ================= OTP Verification =================
-active_user = None
+# ========== OTP Verification ==========
 otp_store = {}
 
 def generate_otp():
     return str(random.randint(100000, 999999))
 
-@app.middleware("http")
-async def one_user_lock(request: Request, call_next):
-    global active_user
-    client_ip = request.client.host
-    if active_user is None:
-        active_user = client_ip
-    if client_ip != active_user:
-        return JSONResponse(status_code=403, content={"error": "Verification locked. Only one person allowed."})
-    return await call_next(request)
-
-# ===== OTP routes =====
 @app.post("/api/verify/aadhar")
 async def verify_aadhar(req: dict):
     aadhar = req.get("aadharNumber")
@@ -234,7 +235,6 @@ async def verify_dl_otp(req: dict):
 
 @app.post("/api/reset-verification")
 async def reset_verification():
-    global active_user, otp_store
-    active_user = None
+    global otp_store
     otp_store = {}
     return {"message":"Verification system reset. Next person can verify now."}
