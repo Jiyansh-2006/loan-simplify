@@ -1,4 +1,4 @@
-const API_URL = https://loan-simp-lify.onrender.com;
+const API_URL =https://backend-loansimplify.onrender.com/;
 
 export const verifyDocument = async (docType, number, file) => {
   try {
@@ -20,4 +20,5 @@ export const verifyDocument = async (docType, number, file) => {
     return { status: "Rejected", feedback: "Server error" };
   }
 };
+
 
