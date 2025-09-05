@@ -23,13 +23,15 @@ from fastapi.responses import JSONResponse
 app = FastAPI()
 
 # Allow frontend requests
+# Allow frontend requests with proper preflight handling
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://loansimp-lif-y.onrender.com"],  # you can restrict to your frontend URL later
+    allow_origins=["https://loansimp-lif-y.onrender.com"],  # frontend URL
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["*"],   # allow all HTTP methods including OPTIONS
+    allow_headers=["*"],   # allow all headers including Content-Type, Authorization
 )
+
 
 # ========== OCR Regex Patterns ==========
 aadhaar_pattern = re.compile(r"^\d{4}\s\d{4}\s\d{4}$")
@@ -248,6 +250,7 @@ async def reset_verification():
     active_user = None
     otp_store = {}
     return {"message":"Verification system reset. Next person can verify now."}
+
 
 
 
