@@ -238,3 +238,7 @@ async def reset_verification():
     global otp_store
     otp_store = {}
     return {"message":"Verification system reset. Next person can verify now."}
+@app.get("/")
+async def root():
+    return {"message": "Backend is running!"}
+
