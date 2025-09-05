@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CheckCircle, Shield, Zap, Clock, ArrowRight, Play, Star, Users, Award, TrendingUp } from "lucide-react";
+import {
+  CheckCircle,
+  Shield,
+  Zap,
+  Clock,
+  ArrowRight,
+  Play,
+  Star,
+  Users,
+  Award,
+  TrendingUp,
+} from "lucide-react";
 import Header from "./Header";
 import Footer from "./Footer";
 import "./Home.css";
@@ -13,26 +24,44 @@ const Home = () => {
     setIsVisible(true);
   }, []);
 
+  const handleGetStarted = () => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      try {
+        const user = JSON.parse(storedUser);
+        if (user) {
+          navigate("/dashboard"); // logged in → dashboard
+          return;
+        }
+      } catch (err) {
+        console.error("Invalid user data in localStorage:", err);
+      }
+    }
+    navigate("/login"); // not logged in → login
+  };
+
   const stats = [
     { number: "1M+", label: "Verifications" },
     { number: "99.9%", label: "Accuracy" },
     { number: "2.3s", label: "Avg. Speed" },
-    { number: "500+", label: "Enterprises" }
+    { number: "500+", label: "Enterprises" },
   ];
 
   const testimonials = [
     {
       name: "Rahul Sharma",
       role: "CTO, FinTech Solutions",
-      content: "LoanSimplify transformed our KYC process. The speed and accuracy are unmatched.",
-      rating: 5
+      content:
+        "LoanSimplify transformed our KYC process. The speed and accuracy are unmatched.",
+      rating: 5,
     },
     {
-      name: "Priya Patel", 
+      name: "Priya Patel",
       role: "Head of Operations, SecureBank",
-      content: "Seamless integration and exceptional security. Our verification time reduced by 90%.",
-      rating: 5
-    }
+      content:
+        "Seamless integration and exceptional security. Our verification time reduced by 90%.",
+      rating: 5,
+    },
   ];
 
   return (
@@ -46,26 +75,28 @@ const Home = () => {
           <div className="gradient-orb orb-2"></div>
           <div className="gradient-orb orb-3"></div>
         </div>
-        
+
         <div className="hero-content">
           <div className="hero-grid">
-            
             {/* Left Text */}
-            <div className={`hero-text ${isVisible ? 'animate-in' : ''}`}>
+            <div className={`hero-text ${isVisible ? "animate-in" : ""}`}>
               <div className="trust-badge">
                 <Shield size={16} />
                 <span>Trusted by 500+ Organizations</span>
               </div>
-              
+
               <h1 className="hero-title">
                 Aadhaar-Based <br />
-                <span className="highlight">Document Verification</span><br />
+                <span className="highlight">Document Verification</span>
+                <br />
                 <span className="gradient-text">Simplified</span>
               </h1>
-              
+
               <p className="hero-subtitle">
-                A secure, compliant, and lightning-fast platform for Aadhaar-based document verification. 
-                Built for businesses, trusted by professionals, and designed for India's digital future.
+                A secure, compliant, and lightning-fast platform for
+                Aadhaar-based document verification. Built for businesses,
+                trusted by professionals, and designed for India's digital
+                future.
               </p>
 
               {/* Stats Row */}
@@ -80,11 +111,14 @@ const Home = () => {
 
               {/* CTA Buttons */}
               <div className="cta-buttons">
-                <button className="btn-primary" onClick={() => navigate("/login")}>
+                <button className="btn-primary" onClick={handleGetStarted}>
                   <span>Get Started</span>
                   <ArrowRight size={20} />
                 </button>
-                <button className="btn-outline" onClick={() => navigate("/signup")}>
+                <button
+                  className="btn-outline"
+                  onClick={() => navigate("/signup")}
+                >
                   <Play size={18} />
                   <span>Watch Demo</span>
                 </button>
@@ -108,7 +142,7 @@ const Home = () => {
             </div>
 
             {/* Right Hero Image */}
-            <div className={`hero-image ${isVisible ? 'animate-in-delay' : ''}`}>
+            <div className={`hero-image ${isVisible ? "animate-in-delay" : ""}`}>
               <div className="image-container">
                 <img
                   src="https://images.pexels.com/photos/5668772/pexels-photo-5668772.jpeg?auto=compress&cs=tinysrgb&w=800"
@@ -150,7 +184,9 @@ const Home = () => {
               Why Choose <span className="highlight">LoanSimplify</span>?
             </h2>
             <p>
-              A trusted platform that combines speed, compliance, and security—empowering organizations to verify identities effortlessly.
+              A trusted platform that combines speed, compliance, and
+              security—empowering organizations to verify identities
+              effortlessly.
             </p>
           </div>
 
@@ -160,7 +196,10 @@ const Home = () => {
                 <Zap />
               </div>
               <h3>Lightning Fast</h3>
-              <p>Verification results in under <strong>3 seconds</strong>. Optimized algorithms ensure speed without compromising accuracy.</p>
+              <p>
+                Verification results in under <strong>3 seconds</strong>.
+                Optimized algorithms ensure speed without compromising accuracy.
+              </p>
               <div className="feature-metric">
                 <TrendingUp size={16} />
                 <span>90% faster than competitors</span>
@@ -172,7 +211,10 @@ const Home = () => {
                 <Shield />
               </div>
               <h3>Bank-Grade Security</h3>
-              <p>Enterprise-level encryption with strict data handling protocols. Your sensitive data is never stored or shared.</p>
+              <p>
+                Enterprise-level encryption with strict data handling protocols.
+                Your sensitive data is never stored or shared.
+              </p>
               <div className="feature-metric">
                 <Award size={16} />
                 <span>ISO 27001 Certified</span>
@@ -184,7 +226,10 @@ const Home = () => {
                 <Clock />
               </div>
               <h3>Always Available</h3>
-              <p>24/7 availability ensures uninterrupted access to our verification services—anytime, anywhere.</p>
+              <p>
+                24/7 availability ensures uninterrupted access to our
+                verification services—anytime, anywhere.
+              </p>
               <div className="feature-metric">
                 <Users size={16} />
                 <span>99.9% uptime guarantee</span>
@@ -201,7 +246,7 @@ const Home = () => {
             <h2>Trusted by Industry Leaders</h2>
             <p>See what our customers have to say about their experience</p>
           </div>
-          
+
           <div className="testimonials-grid">
             {testimonials.map((testimonial, index) => (
               <div key={index} className="testimonial-card">
@@ -210,7 +255,9 @@ const Home = () => {
                     <Star key={i} size={16} fill="currentColor" />
                   ))}
                 </div>
-                <p className="testimonial-content">"{testimonial.content}"</p>
+                <p className="testimonial-content">
+                  "{testimonial.content}"
+                </p>
                 <div className="testimonial-author">
                   <div className="author-info">
                     <div className="author-name">{testimonial.name}</div>
