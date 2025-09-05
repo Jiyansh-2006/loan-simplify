@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
-import "./review.css"; // Make sure to import the CSS file
+import "./Review.css"; // Make sure to import the CSS file
 
 const Review = () => {
   const { state } = useLocation();
