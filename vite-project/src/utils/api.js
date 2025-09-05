@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = https://loan-simp-lify.onrender.com;
 
 export const verifyDocument = async (docType, number, file) => {
   try {
@@ -20,3 +20,4 @@ export const verifyDocument = async (docType, number, file) => {
     return { status: "Rejected", feedback: "Server error" };
   }
 };
+
