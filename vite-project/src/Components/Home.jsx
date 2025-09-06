@@ -115,15 +115,18 @@ const Home = () => {
                   <span>Get Started</span>
                   <ArrowRight size={20} />
                 </button>
+
+                {/* Updated Watch Demo Button with YouTube Link */}
                 <a
-  href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="btn-outline flex items-center gap-2"
->
-  <Play size={18} />
-  <span>Watch Demo</span>
-</a>
+                  href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline flex items-center gap-2"
+                >
+                  <Play size={18} />
+                  <span>Watch Demo</span>
+                </a>
+              </div>
 
               {/* Quick Feature Highlights */}
               <div className="quick-features">
