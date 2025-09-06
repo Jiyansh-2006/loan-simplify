@@ -118,7 +118,7 @@ const Home = () => {
 
                 {/* Updated Watch Demo Button with YouTube Link */}
                 <a
-                  href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID"
+                  href="https://youtu.be/GskhQUSMYTM"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-outline flex items-center gap-2"
